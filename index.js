@@ -16,7 +16,6 @@ const { chromium } = require("playwright");
     await page.click("button[type='submit']", {force: true})
 
     try {
-
       const errorSignIn = await page.waitForSelector(
         ".ui-message-error, .inputError",
         {
@@ -36,7 +35,5 @@ const { chromium } = require("playwright");
   } finally {
     browser.close()
   }
-
-
   // YOUR CODE ENDS
 })();
