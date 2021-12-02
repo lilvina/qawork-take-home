@@ -1,0 +1,22 @@
+{
+  "name": "qawolf-take-home",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lilvina/qawork-take-home.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lilvina/qawork-take-home/issues"
+  },
+  "homepage": "https://github.com/lilvina/qawork-take-home#readme",
+  "devDependencies": {
+    "playwright": "^1.17.0"
+  }
+}
