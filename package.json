@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/lilvina/qawork-take-home#readme",
   "devDependencies": {
+    "@playwright/test": "^1.17.1",
     "playwright": "^1.17.0"
   }
 }

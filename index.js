@@ -13,7 +13,9 @@ const { chromium } = require("playwright");
     await page.goto("https://www.netflix.com/login")
     await page.fill("input[name='userLoginId']", email)
     await page.fill("input[name='password']", password)
-    await page.click("button[type='submit']", {force: true})
+
+    const buttonSignIn = await page.locator("button[type='submit']").first()
+    await buttonSignIn.click()
 
     try {
       const errorSignIn = await page.waitForSelector(
