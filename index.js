@@ -13,27 +13,31 @@ const { chromium } = require("playwright");
 
     //checking for user
     await page.goto("https://www.netflix.com")
-    await page.click("text=Sign In")
-    await page.fill("input[name='userLoginId']", "username111")
-    await page.fill("input[name='password']", "password111")
     const buttonSignIn = await page.locator("button[type='submit']").first()
     await buttonSignIn.click()
-    const errorSignIn = await page.waitForSelector("div[class='ui-message-contents']")
 
-    //check if the username phone number has an invalid number
-    await page.fill("input[name='userLoginId']", "9")
-    await page.click("input[name='password']")
-    const errPhoneMessage = await page.waitForSelector("text=Enter a valid phone number.")
+    await page.waitForSelector("text=Unlimited movies, TV shows, and more.", [
+      { visible: true },
+    ]);
 
-    //checks for invalid email address
-    await page.fill('input[name="userLoginId"]', 'a');
-    await page.click('input[name="password"]');
-    const errEmailMessage = await page.waitForSelector('text=Please enter a valid email.');
+    await page.locator('a:has-text("Sign In")').click();
+    await page.locator('input[name="userLoginId"]').fill("username111")
+    await page.locator('input[name="password"]').fill("password111")
 
-    //checks for invalid password
-    await page.fill('input[name="password"]', '1');
-    await page.click('input[name="userLoginId"]');
-    const errPasswordMessage = await page.waitForSelector('text=Your password must contain between 4 and 60 characters.');
+    await page.waitForSelector("text=Sign In", [{ visible: true }]);
+
+    await Promise.all([
+      page.waitForNavigation({ url: "https://www.netflix.com/login" }),
+      page.locator('button:has-text("Sign In")').click(),
+      page.waitForSelector(".ui-message-contents", ['visible']),    
+    ]);
+
+    await Promise.all([
+      await page.locator("#appMountPoint svg").click(),
+      page.waitForSelector("text=Unlimited movies, TV shows, and more.", [
+        "visible",
+      ]),
+    ]);
 
     //captures screenshot and exits the browser
     await page.screenshot({path: 'screenshot.png'})
